@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "UNO"
+    }
+  },
+  "defaultProject": "UNO",
+  "cli": {
+    "analytics": "4f635361-f76b-4018-bb51-e7ceb23fd0ab"
+  }
 }

@@ -1,0 +1,8 @@
+<div>
+    <fieldset *ngFor="let player of players">
+        <legend>Player {{getNumPlayer(player)}}</legend>
+        <label>Name:</label>
+        <input type="text" [(ngModel)]="player.name">
+    </fieldset>
+    <input type="submit" (click)="submit()">
+</div>
