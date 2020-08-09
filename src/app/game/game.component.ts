@@ -11,7 +11,7 @@ export class GameComponent implements OnInit {
 
   constructor(
     private cards: CardService,
-    private service: CommonService) { }
+    public service: CommonService) { }
 
   ngOnInit(): void {
     this.cards.criaBaralho();
@@ -21,4 +21,18 @@ export class GameComponent implements OnInit {
     console.log(this.service.players);
   }
 
+  getCardId(card){
+    return `${card.color}${card.number}`
+  }
+
+  jogaCarta(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var value = idAttr.nodeValue;
+    console.log(value)
+  }
+
+  getCardImage(card){
+    return `assets/images/${card.color}${card.number}.png`
+  }
 }

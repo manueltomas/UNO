@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Player } from 'C:/Users/manue/Dropbox/Documentos/UNO/UNO/src/app/player';
+import { Player } from './player';
 
 @Injectable({
   providedIn: 'root'

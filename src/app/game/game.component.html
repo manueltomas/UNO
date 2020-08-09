@@ -1,3 +1,7 @@
 <div>
-
+    <div *ngFor="let player of service.players">
+        <div *ngFor="let card of player.cartas">
+            <img id={{getCardId(card)}} (click)='jogaCarta($event)' src={{getCardImage(card)}}>
+        </div>
+    </div>  
 </div>
