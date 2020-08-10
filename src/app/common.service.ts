@@ -25,4 +25,16 @@ export class CommonService {
   definePlayers(players: Player[]){
     this.players = players;
   }
+
+  
+  getPlayersExcept(playerAtual: any): Player[] {
+    var result = [];
+    for (let index = 0; index < this.players.length; index++) {
+      const element = this.players[index];
+      if(element != playerAtual){
+        result.push(element);
+      }
+    }
+    return result;
+  }
 }

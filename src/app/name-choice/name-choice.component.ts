@@ -16,6 +16,14 @@ export class NameChoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.players = this.service.getPlayers();
+    if(this.players.length == 0){
+      this.router.navigate(["/inicial"]);
+      return;
+    }
+    for (let index = 0; index < this.players.length; index++) {
+      const element = this.players[index];
+      element.name = `Player ${index+1}`;
+    }
   }
 
   getNumPlayer(player){

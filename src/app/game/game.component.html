@@ -1,6 +1,14 @@
 <div>
-    <div *ngFor="let player of service.players">
-        <div *ngFor="let card of player.cartas">
+    <div *ngIf="service.players.length == 2" style="margin: auto; width: 50%; vertical-align: middle; height: 50%;">
+        <div *ngFor="let player of otherPlayers">
+            <div *ngFor="let card of player.cartas" style="display: inline;">
+                <img src="assets/images/TRASEIRA.png">
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <span style="font-size: larger;">Cartas de {{playerAtual.name}}</span>
+        </div>
+        <div *ngFor="let card of playerAtual.cartas" style="display: inline;">
             <img id={{getCardId(card)}} (click)='jogaCarta($event)' src={{getCardImage(card)}}>
         </div>
     </div>  
