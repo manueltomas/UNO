@@ -1,4 +1,4 @@
 export interface Card{
-    number: String,
-    color: String
+    number: string,
+    color: string
 }

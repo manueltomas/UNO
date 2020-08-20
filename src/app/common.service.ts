@@ -37,4 +37,45 @@ export class CommonService {
     }
     return result;
   }
+
+  playCard(value, playerAtual: Player) {
+    this.players.forEach(element => {
+      if(element == playerAtual){
+        this.takeCard(value,playerAtual);
+      }
+    })
+  }
+
+  takeCard(card, player:Player){
+    var newArray = [];
+    player.cartas.forEach(pCard => {
+      var aux = `${pCard.color}${pCard.number}`;
+      if(aux != card){
+        newArray.push(pCard);
+      }
+    })
+    player.cartas = newArray;
+  }
+
+  addCard(playerAtual, card){
+    for (let index = 0; index < this.players.length; index++) {
+      const element = this.players[index];
+      if(element == playerAtual){
+        this.players[index].cartas.push(card);
+      }
+    }
+  }
+  verificaVencedor(){
+    for (let index = 0; index < this.players.length; index++) {
+      const element = this.players[index];
+      if(element.cartas.length == 0){
+        return element;
+      }
+    }
+    return null;
+  }
+
+  clear(){
+    this.players = [];
+  }
 }

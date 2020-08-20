@@ -1,15 +1,53 @@
-<div>
-    <div *ngIf="service.players.length == 2" style="margin: auto; width: 50%; vertical-align: middle; height: 50%;">
-        <div *ngFor="let player of otherPlayers">
-            <div *ngFor="let card of player.cartas" style="display: inline;">
-                <img src="assets/images/TRASEIRA.png">
+<div id="white">
+    Passar para {{proximoPlayer.name}}
+    <button (click)="continue()">Sou {{proximoPlayer.name}}</button>
+</div>
+<div id="master">
+    <div class="monte">
+        <div class="card">
+            <img id={{getCardId(topo)}} src={{getCardImage(topo)}}>
+        </div>
+        <div class="monte">
+            <img id="tirar" src="assets/images/TRASEIRA.png" (click)='tiraCarta()'>
+        </div>
+    </div>
+    <div class="players">
+        <!-- <div *ngIf="service.players.length == 2" style="margin: auto; width: 50%; vertical-align: middle; height: 50%;"> -->
+        <div class="container">
+            <div class="name">
+                <span>Cartas de {{playerAtual.name}}</span>
             </div>
-        </div>
-        <div style="text-align: center;">
-            <span style="font-size: larger;">Cartas de {{playerAtual.name}}</span>
-        </div>
-        <div *ngFor="let card of playerAtual.cartas" style="display: inline;">
-            <img id={{getCardId(card)}} (click)='jogaCarta($event)' src={{getCardImage(card)}}>
-        </div>
-    </div>  
+            <div class="cards">
+                <div class="card" *ngFor="let card of playerAtual.cartas">
+                    <img id={{getCardId(card)}} (click)='jogaCarta($event)' src={{getCardImage(card)}}>
+                </div>
+            </div>
+            <div *ngFor="let player of otherPlayers">
+                <div class="name">
+                    <span>Cartas de {{player.name}}</span>
+                </div>
+                <div class="cards">
+                    <div class="card" *ngFor="let card of player.cartas">
+                        <img src="assets/images/TRASEIRA.png">
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <!-- <div *ngIf="service.players.length == 3" style="margin: auto; width: 50%; vertical-align: middle; height: 50%;">
+            <div *ngFor="let player of otherPlayers">
+                <div style="text-align: center;">
+                    <span style="font-size: larger;">Cartas de {{player.name}}</span>
+                </div>
+                <div *ngFor="let card of player.cartas" style="display: inline;">
+                    <img src="assets/images/TRASEIRA.png" style="transform: rotate(90deg);">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <span style="font-size: larger;">Cartas de {{playerAtual.name}}</span>
+            </div>
+            <div *ngFor="let card of playerAtual.cartas" style="display: inline;">
+                <img id={{getCardId(card)}} (click)='jogaCarta($event)' src={{getCardImage(card)}}>
+            </div>
+        </div>   -->
+    </div>
 </div>

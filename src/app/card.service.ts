@@ -70,6 +70,18 @@ export class CardService {
       })
     })
     this.baralho = this.shuffle(this.baralho);
+    //this.monte.push(this.baralho.pop());
+    var aux1 = [];
+    var aux2 = this.baralho.pop();
+    while(aux2.color === ""){
+      aux1.push(aux2);
+      aux2 = this.baralho.pop();
+    }
+    aux1.forEach(aux3 => {
+      this.baralho.push(aux3);
+    })
+    this.monte.push(aux2);
+    console.log(this.monte);
     console.log(this.baralho);
   }
 
@@ -99,5 +111,42 @@ export class CardService {
     }
   
     return array;
+  }
+
+  playCard(card){
+    var aux = [];
+    this.jogadores.forEach(aux1 => {
+      var nomeCard = `${aux1.color}${aux1.number}`
+      if(nomeCard != card){
+        aux.push(aux1);
+      }else{
+        this.monte.push(aux1);
+      }
+    })
+    this.jogadores = aux;
+  }
+
+  verificaRegra(carta:string, topo:Card){
+    var aux = `${topo.color}${topo.number}`;
+    if(carta.includes("MAIS4") || carta.includes("MUDACOR")){
+      return true;
+    }
+    if(!carta.includes(topo.color) && !carta.includes(topo.number)){
+      alert("Não pode jogar esta carta!");
+      return false;
+    }
+    return true;
+  }
+
+  tiraCarta(){
+    var aux = this.baralho.pop();
+    this.jogadores.push(aux);
+    return aux;
+  }
+
+  restart(){
+    this.baralho = [];
+    this.monte = [];
+    this.jogadores = [];
   }
 }
