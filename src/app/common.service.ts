@@ -48,6 +48,9 @@ export class CommonService {
 
   takeCard(card, player:Player){
     var newArray = [];
+    if(card.includes("MAIS4")){
+      card = "MAIS4";
+    }
     player.cartas.forEach(pCard => {
       var aux = `${pCard.color}${pCard.number}`;
       if(aux != card){

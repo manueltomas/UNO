@@ -2,6 +2,15 @@
     Passar para {{proximoPlayer.name}}
     <button (click)="continue()">Sou {{proximoPlayer.name}}</button>
 </div>
+<div id="escolheCor">
+    <select name="cor" id="cor" [(ngModel)]="cor">
+        <option value="vermelho">Vermelho</option>
+        <option value="verde">Verde</option>
+        <option value="azul">Azul</option>
+        <option value="amarelo">Amarelo</option>
+    </select>
+    <button (click)="escolheCor()">Escolher cor</button>
+</div>
 <div id="master">
     <div class="monte">
         <div class="card">

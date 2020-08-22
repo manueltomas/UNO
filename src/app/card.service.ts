@@ -115,11 +115,23 @@ export class CardService {
 
   playCard(card){
     var aux = [];
+    var cardAux = card.includes("MAIS4") ? `MAIS4` : card;
     this.jogadores.forEach(aux1 => {
       var nomeCard = `${aux1.color}${aux1.number}`
-      if(nomeCard != card){
+      if(nomeCard != cardAux){
         aux.push(aux1);
       }else{
+        if(cardAux === "MAIS4"){
+          if(card.includes("AMARELO")){
+            aux1.color = "AMARELO";
+          }else if(card.includes("AZUL")){
+            aux1.color = "AZUL";
+          }else if(card.includes("VERDE")){
+            aux1.color = "VERDE";
+          }else{
+            aux1.color = "VERMELHO";
+          }
+        }
         this.monte.push(aux1);
       }
     })
