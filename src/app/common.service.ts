@@ -38,10 +38,10 @@ export class CommonService {
     return result;
   }
 
-  playCard(value, playerAtual: Player) {
+  playCard(cartaAJogar, playerAtual: Player) {
     this.players.forEach(element => {
       if(element == playerAtual){
-        this.takeCard(value,playerAtual);
+        this.takeCard(cartaAJogar,playerAtual);
       }
     })
   }
@@ -51,10 +51,16 @@ export class CommonService {
     if(card.includes("MAIS4")){
       card = "MAIS4";
     }
+    if(card.includes("MUDACOR")){
+      card = "MUDACOR";
+    }
+    let naoTira = false;
     player.cartas.forEach(pCard => {
       var aux = `${pCard.color}${pCard.number}`;
-      if(aux != card){
+      if(aux != card || naoTira){
         newArray.push(pCard);
+      }else{
+        naoTira = true;
       }
     })
     player.cartas = newArray;

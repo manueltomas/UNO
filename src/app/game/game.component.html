@@ -4,20 +4,20 @@
 </div>
 <div id="escolheCor">
     <select name="cor" id="cor" [(ngModel)]="cor">
-        <option value="vermelho">Vermelho</option>
-        <option value="verde">Verde</option>
-        <option value="azul">Azul</option>
-        <option value="amarelo">Amarelo</option>
+        <option value="VERMELHO">Vermelho</option>
+        <option value="VERDE">Verde</option>
+        <option value="AZUL">Azul</option>
+        <option value="AMARELO">Amarelo</option>
     </select>
     <button (click)="escolheCor()">Escolher cor</button>
 </div>
 <div id="master">
     <div class="monte">
         <div class="card">
-            <img id={{getCardId(topo)}} src={{getCardImage(topo)}}>
+            <img id={{getCardId(cards.getTopCard())}} src={{getCardImage(cards.getTopCard())}}>
         </div>
         <div class="monte">
-            <img id="tirar" src="assets/images/TRASEIRA.png" (click)='tiraCarta()'>
+            <img id="tirar" src="assets/images/TRASEIRA.png" (click)='tiraCartaEAcaba()'>
         </div>
     </div>
     <div class="players">

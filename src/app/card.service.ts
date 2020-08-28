@@ -114,14 +114,20 @@ export class CardService {
   }
 
   playCard(card){
+    console.log(card);
     var aux = [];
-    var cardAux = card.includes("MAIS4") ? `MAIS4` : card;
+    var cardAux = card;
+    if(card.includes("MAIS4")){
+      cardAux = "MAIS4";
+    }else if(card.includes("MUDACOR")){
+      cardAux = "MUDACOR";
+    }
     this.jogadores.forEach(aux1 => {
       var nomeCard = `${aux1.color}${aux1.number}`
       if(nomeCard != cardAux){
         aux.push(aux1);
       }else{
-        if(cardAux === "MAIS4"){
+        if(cardAux === "MAIS4" || cardAux === "MUDACOR"){
           if(card.includes("AMARELO")){
             aux1.color = "AMARELO";
           }else if(card.includes("AZUL")){
@@ -143,7 +149,7 @@ export class CardService {
     if(carta.includes("MAIS4") || carta.includes("MUDACOR")){
       return true;
     }
-    if(!carta.includes(topo.color) && !carta.includes(topo.number)){
+    if(!(carta.includes(topo.color) || carta.includes(topo.number))){
       alert("Não pode jogar esta carta!");
       return false;
     }
@@ -160,5 +166,8 @@ export class CardService {
     this.baralho = [];
     this.monte = [];
     this.jogadores = [];
+  }
+  getTopCard(){
+    return this.monte[this.monte.length-1];
   }
 }
