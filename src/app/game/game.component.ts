@@ -12,7 +12,7 @@ export class GameComponent implements OnInit {
 
   playerAtual;
   proximoPlayer;
-  indexAtual = 0;
+  indexSeguinte = 0;
   otherPlayers = [];
   topo;
   sentidoHorario = true;
@@ -36,9 +36,9 @@ export class GameComponent implements OnInit {
     this.service.players.forEach(player => {
       player.cartas = this.cards.getJogo();
     });
-    this.playerAtual = this.service.players[this.indexAtual];
+    this.playerAtual = this.service.players[this.indexSeguinte];
     this.proximoPlayer = this.service.players[this.getNextIndex()];
-    this.indexAtual = this.getNextIndex();
+    this.indexSeguinte = this.getNextIndex();
     this.otherPlayers = this.service.getPlayersExcept(this.playerAtual);
     this.topo = this.cards.monte[this.cards.monte.length-1];
     console.log(this.service.players);
@@ -57,7 +57,9 @@ export class GameComponent implements OnInit {
       if(cartaAJogar.includes("TROCASENTIDO")){
         //troca o sentido de jogo
         this.sentidoHorario = !this.sentidoHorario;
-        
+        this.indexSeguinte = this.getNextIndex();
+        this.proximoPlayer = this.service.players[this.getNextIndex()];
+        this.indexSeguinte = this.getNextIndex();
       }else
       if(cartaAJogar.includes("NAOJOGA")){
         naoJoga = true;
@@ -83,6 +85,8 @@ export class GameComponent implements OnInit {
     this.continuar = false;
     this.tiraEscolhaCor();
     if(cartaAJogar.includes("MAIS4")){
+      console.log("mais4")
+      console.log(this.cor);
       cartaAJogar = `${this.cor}MAIS4`;
     }else if(cartaAJogar.includes("MUDACOR")){
       cartaAJogar = `${this.cor}MUDACOR`;
@@ -100,13 +104,13 @@ export class GameComponent implements OnInit {
       return;
     }
     if(confirm(`O jogador ${aux.name} venceu! Deseja iniciar um novo jogo?`)){
-      this.indexAtual = 0;
+      this.indexSeguinte = 0;
       this.cards.restart();
       this.ngOnInit();
       return;
     }else{
       this.playerAtual = null;
-      this.indexAtual = 0;
+      this.indexSeguinte = 0;
       this.otherPlayers = [];
       this.topo = null;
       this.service.clear();
@@ -135,12 +139,12 @@ export class GameComponent implements OnInit {
   }
   getNextIndex(){
     if(this.sentidoHorario){
-      return (this.indexAtual + 1)%this.service.players.length;
+      return (this.indexSeguinte + 1)%this.service.players.length;
     }else{
-      if(this.indexAtual - 1 < 0){
+      if(this.indexSeguinte - 1 < 0){
         return this.service.players.length-1;
       }else{
-        return this.indexAtual - 1;
+        return this.indexSeguinte - 1;
       }
     }
   }
@@ -159,10 +163,10 @@ export class GameComponent implements OnInit {
   }
 
   proximaRonda(){
-    this.playerAtual = this.service.players[this.indexAtual];
+    this.playerAtual = this.service.players[this.indexSeguinte];
     this.otherPlayers = this.service.getPlayersExcept(this.playerAtual);
     this.proximoPlayer = this.service.players[this.getNextIndex()];
-    this.indexAtual = this.getNextIndex();
+    this.indexSeguinte = this.getNextIndex();
   }
 
   mostraBranco(){

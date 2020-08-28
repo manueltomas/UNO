@@ -122,9 +122,10 @@ export class CardService {
     }else if(card.includes("MUDACOR")){
       cardAux = "MUDACOR";
     }
+    var tiraMais = true;
     this.jogadores.forEach(aux1 => {
       var nomeCard = `${aux1.color}${aux1.number}`
-      if(nomeCard != cardAux){
+      if(nomeCard != cardAux || !tiraMais){
         aux.push(aux1);
       }else{
         if(cardAux === "MAIS4" || cardAux === "MUDACOR"){
@@ -139,6 +140,7 @@ export class CardService {
           }
         }
         this.monte.push(aux1);
+        tiraMais = false;
       }
     })
     this.jogadores = aux;
@@ -158,6 +160,14 @@ export class CardService {
 
   tiraCarta(){
     var aux = this.baralho.pop();
+    if(this.baralho.length == 0){
+      var topo = this.monte[this.monte.length-1];
+      this.monte.pop();
+      this.baralho = this.monte;
+      this.monte = [];
+      this.monte.push(topo);
+      this.shuffle(this.baralho);
+    }
     this.jogadores.push(aux);
     return aux;
   }
